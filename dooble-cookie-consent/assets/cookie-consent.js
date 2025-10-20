@@ -50,7 +50,7 @@
 		document.head.appendChild(s);
 	}
 
-	if( ! getCookie( COOKIE_NAME ) ) {
+	if( getCookie( COOKIE_NAME ) === null ) {
 		document.querySelector('#cookie-banner').classList.add('active');
 	}
 	btnAccept?.addEventListener('click', function () {
