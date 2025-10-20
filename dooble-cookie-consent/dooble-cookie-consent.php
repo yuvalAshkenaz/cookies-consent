@@ -13,8 +13,8 @@ function dooble_cookie_consent_enqueue_scripts() {
         return;
     }
 
-    wp_enqueue_script('cookie-consent', plugin_dir_url(__FILE__) . 'assets/cookie-consent.js', array('jquery'), null, true);
-    wp_enqueue_style('cookie-consent', plugin_dir_url(__FILE__) . 'assets/cookie-consent.css');
+    wp_enqueue_script('cookie-consent', plugin_dir_url(__FILE__) . 'assets/cookie-consent.js', array(), null, true);
+    wp_enqueue_style('cookie-consent', plugin_dir_url(__FILE__) . 'assets/cookie-consent.css', array(), null, 'all');
 }
 add_action('wp_enqueue_scripts', 'dooble_cookie_consent_enqueue_scripts');
 
@@ -84,6 +84,14 @@ function dooble_cookie_consent_init() {
 					'message' => 'מוצג למנהל האתר בלבד',
 					'ui' => 1,
 				),
+				array(
+					'key' => 'field_cookie_scripts_after_approve',
+					'label' => 'סקריפטים שיופעלו לאחר אישור הגולש',
+					'instructions' => 'ללא HTML',
+					'name' => 'cookie_scripts_after_approve',
+					'type' => 'textarea',
+					'rows' => 22,
+				),
             ),
             'location' => array(
                 array(
@@ -112,6 +120,7 @@ function dooble_cookie_consent_init() {
         $cookie_message = get_field('cookie_message', 'option');
         $accept_btn_text = get_field('cookie_accept_btn_text', 'option');
         $decline_btn_text = get_field('cookie_decline_btn_text', 'option');
+        $cookie_scripts_after_approve = get_field('cookie_scripts_after_approve', 'option');
 
         if ( empty( $cookie_message ) ) {
             $cookie_message = 'אנו משתמשים בקובצי Cookie לתפקודים חיוניים, ניתוח נתונים ושיווק. באפשרותך לקבל או לדחות קובצי Cookie שאינם חיוניים.';
@@ -138,7 +147,16 @@ function dooble_cookie_consent_init() {
 					'</button>
 				</div>
 			</div>
-		</div>';
+		</div>
+		<script>
+		function enableNonEssentialScripts() {
+			// כאן אפשר להוסיף סקריפטים אחרים לא-הכרחיים
+			// import("/content/js/the-script.js");
+			' . $cookie_scripts_after_approve . '
+			// iframe-אם טוענים טאג מנגר אז לא צריך לטעון את ה
+		}
+		</script>
+		';
     }
     add_action('wp_footer', 'dooble_cookie_consent_banner');
 }

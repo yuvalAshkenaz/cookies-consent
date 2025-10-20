@@ -1,5 +1,6 @@
 (function () {
-	document.getElementById('od-accept').focus();
+	if( document.getElementById('od-accept') )
+		document.getElementById('od-accept').focus();
 	
 	const COOKIE_NAME = 'od_consent';
 	const COOKIE_DAYS = 365;
@@ -36,13 +37,6 @@
 		if (v == 1) {
 			enableNonEssentialScripts();
 		}
-	}
-
-	function enableNonEssentialScripts() {
-		// כאן אפשר להוסיף סקריפטים אחרים לא-הכרחיים
-		// import('/content/js/the-script.js');
-		
-		// iframe-אם טוענים טאג מנג'ר אז לא צריך לטעון את ה
 	}
 
 	function loadScript(src) {
