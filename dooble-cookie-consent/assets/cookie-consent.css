@@ -13,6 +13,9 @@
     z-index: 8009;
 	justify-content: center;
 }
+.consent:not(.active) {
+	display: none;
+}
 .consent p {
 	margin: 0;
 }

@@ -162,4 +162,3 @@ function dooble_cookie_consent_init() {
 }
 
 add_action('plugins_loaded', 'dooble_cookie_consent_init');
-

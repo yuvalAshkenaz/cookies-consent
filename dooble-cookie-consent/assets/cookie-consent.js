@@ -1,3 +1,8 @@
+/* dooble cookies consent
+ * By dooble
+ * Version: 1.0
+ * Last updated: 20/10/2025
+ */
 (function () {
 	if( document.getElementById('od-accept') )
 		document.getElementById('od-accept').focus();
@@ -33,12 +38,11 @@
 	}
 
 	function showBannerIfNeeded() {
-		const v = getCookie(COOKIE_NAME);
-		if (v == 1) {
+		const v = getCookie( COOKIE_NAME );
+		if ( v == 1 ) {
 			enableNonEssentialScripts();
 		}
 	}
-
 	function loadScript(src) {
 		const s = document.createElement('script');
 		s.src = src;
@@ -46,7 +50,9 @@
 		document.head.appendChild(s);
 	}
 
-
+	if( ! getCookie( COOKIE_NAME ) ) {
+		document.querySelector('#cookie-banner').classList.add('active');
+	}
 	btnAccept?.addEventListener('click', function () {
 		setCookie(COOKIE_NAME, 1, COOKIE_DAYS);
 		banner.classList.add('od-hidden');
