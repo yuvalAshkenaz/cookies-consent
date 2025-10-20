@@ -2,7 +2,7 @@
 /*
 Plugin Name: dooble cookies consent
 Description: An accessible cookies consent plugin with customizable message and buttons text.
-Version: 1.0.0
+Version: 1.0
 Author: dooble
 */
 
@@ -162,3 +162,4 @@ function dooble_cookie_consent_init() {
 }
 
 add_action('plugins_loaded', 'dooble_cookie_consent_init');
+
