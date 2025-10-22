@@ -2,7 +2,7 @@
 /*
 Plugin Name: dooble cookies consent
 Description: An accessible cookies consent plugin with customizable message and buttons text.
-Version: 1.0
+Version: 1.1
 Author: dooble
 */
 
@@ -151,7 +151,14 @@ function dooble_cookie_consent_init() {
 		<script>
 		function enableNonEssentialScripts() {
 			// כאן אפשר להוסיף סקריפטים אחרים לא-הכרחיים
-			// import("/content/js/the-script.js");
+			
+			// קריאה לקובץ סקריפט
+			// const s = document.createElement("script");
+			// s.src = "https://www.test.com";
+			// s.type = "text/javascript";
+			// s.async = false;
+			// document.body.appendChild(s);
+			
 			' . $cookie_scripts_after_approve . '
 			// iframe-אם טוענים טאג מנגר אז לא צריך לטעון את ה
 		}
