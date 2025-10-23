@@ -1,14 +1,14 @@
 /* dooble cookies consent
  * By dooble
- * Version: 1.1
- * Last updated: 22/10/2025
+ * Version: 1.2
+ * Last updated: 23/10/2025
  */
 (function () {
 	if( document.getElementById('od-accept') )
 		document.getElementById('od-accept').focus();
 	
 	const COOKIE_NAME = 'od_consent';
-	const COOKIE_DAYS = 365;
+	const COOKIE_DAYS = document.getElementById('acf-field_cookie_time') ? parseInt( document.getElementById('acf-field_cookie_time').value ) : 90;
 
 	const banner = document.getElementById('cookie-banner');
 	const btnAccept = document.getElementById('od-accept');
@@ -50,7 +50,7 @@
 		document.head.appendChild(s);
 	}
 
-	if( getCookie( COOKIE_NAME ) === null ) {
+	if( getCookie( COOKIE_NAME ) === null && document.querySelector('#cookie-banner') ) {
 		document.querySelector('#cookie-banner').classList.add('active');
 	}
 	btnAccept?.addEventListener('click', function () {
