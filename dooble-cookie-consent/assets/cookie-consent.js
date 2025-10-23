@@ -50,7 +50,7 @@
 		document.head.appendChild(s);
 	}
 
-	if( getCookie( COOKIE_NAME ) === null && document.querySelector('#cookie-banner') ) {
+	if( getCookie( COOKIE_NAME ) === null && ! sessionStorage.getItem(COOKIE_NAME) && document.querySelector('#cookie-banner') ) {
 		document.querySelector('#cookie-banner').classList.add('active');
 	}
 	btnAccept?.addEventListener('click', function () {
@@ -60,7 +60,7 @@
 	});
 
 	btnDecline?.addEventListener('click', function () {
-		setCookie(COOKIE_NAME, 0, COOKIE_DAYS);
+		sessionStorage.setItem(COOKIE_NAME, 1);
 		banner.classList.add('od-hidden');
 		// לא טוענים כלום
 	});
