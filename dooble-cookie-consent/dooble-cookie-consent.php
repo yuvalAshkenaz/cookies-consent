@@ -68,8 +68,7 @@ function dooble_cookie_consent_init() {
             'fields' => array(
 				array(
 					'key' => 'field_cookie_time',
-					'label' => 'זמן לשמירת ה-cookie',
-					'instructions' => 'מספרים בלבד',
+					'label' => 'לכמה ימים לשמור את ה-cookie?',
 					'name' => 'cookie_time',
 					'type' => 'number',
 					'step' => 1,
