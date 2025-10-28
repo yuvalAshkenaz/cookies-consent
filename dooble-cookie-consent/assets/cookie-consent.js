@@ -1,7 +1,7 @@
 /* dooble cookies consent
  * By dooble
- * Version: 1.2
- * Last updated: 23/10/2025
+ * Version: 1.2.1
+ * Last updated: 28/10/2025
  */
 (function () {
 	if( document.getElementById('od-accept') )

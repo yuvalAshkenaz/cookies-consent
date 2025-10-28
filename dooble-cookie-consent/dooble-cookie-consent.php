@@ -2,7 +2,7 @@
 /*
 Plugin Name: dooble cookies consent
 Description: An accessible cookies consent plugin with customizable message and buttons text.
-Version: 1.2
+Version: 1.2.1
 Author: dooble
 */
 
@@ -176,10 +176,10 @@ function dooble_cookie_consent_init() {
 					' . $cookie_message . '
 				</div>
 				<div class="consent-btns">
-					<button type="button" id="od-decline" class="consent-decline" aria-label="' . __('Decline cookies', 'dooble_cookies_consent') . '" aria-controls="cookie-banner"> 
+					<button type="button" id="od-decline" class="consent-decline" aria-controls="cookie-banner"> 
 						' . $decline_btn_text . '
 					</button>
-					<button type="button" id="od-accept" class="consent-accept" aria-label="' . __('Accept cookies', 'dooble_cookies_consent') . '" aria-controls="cookie-banner"> 
+					<button type="button" id="od-accept" class="consent-accept" aria-controls="cookie-banner"> 
 						' . $accept_btn_text . '
 					</button>
 				</div>
