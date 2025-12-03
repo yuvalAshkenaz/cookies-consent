@@ -21,9 +21,8 @@
 			d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000);
 			expires = '; expires=' + d.toUTCString();
 		}
-		document.cookie =
-		name + '=' + encodeURIComponent(value) + expires +
-		'; Path=/; Domain='+window.location.hostname+'; Secure; SameSite=Lax';
+		const secure = window.location.protocol === 'https:' ? '; Secure' : '';
+		document.cookie = name + '=' + encodeURIComponent(value) + expires + '; Path=/; Domain=' + window.location.hostname + secure + '; SameSite=Lax';
 	}
 
 	function getCookie(name) {
