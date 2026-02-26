@@ -1,7 +1,7 @@
 /* dooble cookies consent
  * By dooble
- * Version: 1.2.2
- * Last updated: 03/12/2025
+ * Version: 1.3
+ * Last updated: 26/02/2026
  */
 .consent {
     background: rgba(17, 17, 17, 0.8);
@@ -10,7 +10,6 @@
     width: 100%;
     height: auto;
 	line-height: 1.5;
-	direction:rtl;
     position: fixed;
     bottom: 0;
     padding: 20px 30px;
@@ -43,7 +42,7 @@
 	color: #fff;
 }
 .consent-btns {
-	width: 204px;
+	width: max-content;
     display: flex;
     gap: 16px;
 	flex-shrink: 0;
@@ -86,5 +85,4 @@
 	.consent-inner {
 		flex-direction: column;
 	}
-
 }

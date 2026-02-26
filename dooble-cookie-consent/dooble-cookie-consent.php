@@ -2,12 +2,12 @@
 /*
 Plugin Name: dooble cookies consent
 Description: An accessible cookies consent plugin with customizable message and buttons text.
-Version: 1.2.2
+Version: 1.3
 Author: dooble
 */
 
 add_action('wp_enqueue_scripts', 'dooble_cookie_consent_enqueue_scripts');
-add_action('plugins_loaded', 'dooble_cookie_consent_init');
+add_action('init', 'dooble_cookie_consent_init');
 
 /*
 * Add css file to admin
@@ -26,6 +26,16 @@ function dooble_cookie_consent_enqueue_scripts() {
 // Hook into WordPress initialization to ensure ACF is loaded first
 function dooble_cookie_consent_init() {
 	global $default_values, $current_lang;
+	
+	// קביעת השפה הכללית של האתר
+    $site_locale = get_locale();
+    $current_lang = substr($site_locale, 0, 2); // מחזיר 'he', 'en' וכו'
+
+    // בדיקה שהשפה קיימת במערך הדיפולטים שלנו, אם לא - קבע עברית
+    $supported_langs = ['he', 'en', 'ar'];
+    if ( ! in_array( $current_lang, $supported_langs ) ) {
+        $current_lang = 'he';
+    }
 	
     // Check if ACF plugin is active
     if ( function_exists('acf_add_options_page') ) {
@@ -58,7 +68,14 @@ function dooble_cookie_consent_init() {
 			'ar' => 'انخفاض',
 		),
 	);
-	$current_lang = ICL_LANGUAGE_CODE;
+	
+	if (defined('ICL_LANGUAGE_CODE')) {
+		$current_lang = ICL_LANGUAGE_CODE;
+	} elseif (isset($GLOBALS['ICL_LANGUAGE_CODE'])) {
+		$current_lang = $GLOBALS['ICL_LANGUAGE_CODE'];
+	} else {
+		$current_lang = 'he';
+	}
 	
     // Create the ACF fields for cookie consent settings
     if( function_exists('acf_add_local_field_group') ) {
@@ -88,7 +105,7 @@ function dooble_cookie_consent_init() {
                     'type' => 'text',
                     'default_value' => $default_values['accept'][ $current_lang ],
 					'wrapper' => array(
-						'width' => 50,
+						'width' => 33,
 					),
                 ),
                 array(
@@ -98,8 +115,21 @@ function dooble_cookie_consent_init() {
                     'type' => 'text',
                     'default_value' => $default_values['decline'][ $current_lang ],
 					'wrapper' => array(
-						'width' => 50,
+						'width' => 33,
 					),
+                ),
+                // השדה החדש שהוספנו להסתרת כפתור הסירוב
+                array(
+                    'key' => 'field_cookie_hide_decline_btn',
+                    'label' => 'הסתר כפתור סירוב',
+                    'name' => 'cookie_hide_decline_btn',
+                    'type' => 'true_false',
+                    'message' => 'אל תציג כפתור סירוב',
+                    'default_value' => 0,
+                    'ui' => 1,
+                    'wrapper' => array(
+                        'width' => 33,
+                    ),
                 ),
 				array(
 					'key' => 'field_cookie_active',
@@ -157,6 +187,7 @@ function dooble_cookie_consent_init() {
 		$cookie_message = get_field('cookie_message', 'option');
 		$accept_btn_text = get_field('cookie_accept_btn_text', 'option');
 		$decline_btn_text = get_field('cookie_decline_btn_text', 'option');
+        $hide_decline_btn = get_field('cookie_hide_decline_btn', 'option'); // קריאת הנתון מהצ'קבוקס החדש
 		$cookie_scripts_after_approve = get_field('cookie_scripts_after_approve', 'option');
 		
 		if ( empty( $cookie_message ) ) {
@@ -169,6 +200,15 @@ function dooble_cookie_consent_init() {
 			$decline_btn_text = $default_values['decline'][ $current_lang ];
 		}
 
+        // הכנת ה-HTML של כפתור הסירוב רק במידה והוא לא הוסתר
+        $decline_btn_html = '';
+        if ( ! $hide_decline_btn ) {
+            $decline_btn_html = '
+            <button type="button" id="od-decline" class="consent-decline" aria-controls="cookie-banner"> 
+                ' . $decline_btn_text . '
+            </button>';
+        }
+
 		echo '
 		<div id="cookie-banner" class="consent" role="region" aria-label="' . __('Cookie consent', 'dooble_cookies_consent') . '">
 			<div class="consent-inner">
@@ -176,9 +216,7 @@ function dooble_cookie_consent_init() {
 					' . $cookie_message . '
 				</div>
 				<div class="consent-btns">
-					<button type="button" id="od-decline" class="consent-decline" aria-controls="cookie-banner"> 
-						' . $decline_btn_text . '
-					</button>
+                    ' . $decline_btn_html . '
 					<button type="button" id="od-accept" class="consent-accept" aria-controls="cookie-banner"> 
 						' . $accept_btn_text . '
 					</button>
@@ -188,20 +226,8 @@ function dooble_cookie_consent_init() {
 		<script>
 		function enableNonEssentialScripts() {' .
 			
-			// כאן אפשר להוסיף סקריפטים אחרים לא-הכרחיים
-
-			// iframe-אם טוענים טאג מנגר אז לא צריך לטעון את ה
-			
-			// קריאה לקובץ סקריפט
-			// const s = document.createElement("script");
-			// s.src = "https://www.test.com";
-			// s.type = "text/javascript";
-			// s.async = false;
-			// document.body.appendChild(s);
-			
 			$cookie_scripts_after_approve . '
 		}
 		</script>';
 	}
-
 }
