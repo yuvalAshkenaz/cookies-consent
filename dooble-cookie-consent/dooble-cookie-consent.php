@@ -2,7 +2,7 @@
 /*
 Plugin Name: dooble cookies consent
 Description: An accessible cookies consent plugin with customizable message and buttons text.
-Version: 1.3
+Version: 1.5
 Author: dooble
 */
 
@@ -69,6 +69,7 @@ function dooble_cookie_consent_init() {
 		),
 	);
 	
+    // שימוש בטכניקה הבטוחה לבדיקת השפה כפי שדיברנו קודם
 	if (defined('ICL_LANGUAGE_CODE')) {
 		$current_lang = ICL_LANGUAGE_CODE;
 	} elseif (isset($GLOBALS['ICL_LANGUAGE_CODE'])) {
@@ -177,6 +178,12 @@ function dooble_cookie_consent_init() {
 		$cookie_active = get_field('cookie_active', 'option');
 		$cookie_admin_active = get_field('cookie_admin_active', 'option');
 		
+		echo '<script>
+		function enableNonEssentialScripts() {' .
+			$cookie_scripts_after_approve . '
+		}
+		</script>';
+		
 		if ( isset( $_COOKIE['od_consent'] ) || ( ! empty( $cookie_active ) && ! $cookie_active ) ) {
 			return;
 		}
@@ -223,11 +230,6 @@ function dooble_cookie_consent_init() {
 				</div>
 			</div>
 		</div>
-		<script>
-		function enableNonEssentialScripts() {' .
-			
-			$cookie_scripts_after_approve . '
-		}
-		</script>';
+		';
 	}
 }
