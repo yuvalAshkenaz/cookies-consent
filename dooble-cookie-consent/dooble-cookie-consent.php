@@ -2,7 +2,7 @@
 /*
 Plugin Name: dooble cookies consent
 Description: An accessible cookies consent plugin with customizable message and buttons text.
-Version: 1.5
+Version: 1.5.1
 Author: dooble
 */
 
@@ -178,12 +178,17 @@ function dooble_cookie_consent_init() {
 		$cookie_active = get_field('cookie_active', 'option');
 		$cookie_admin_active = get_field('cookie_admin_active', 'option');
 		
+		// 1. קודם שולפים את הסקריפטים מההגדרות
+		$cookie_scripts_after_approve = get_field('cookie_scripts_after_approve', 'option');
+		
+		// 2. עכשיו מדפיסים את הסקריפט עם המשתנה שכבר מוגדר
 		echo '<script>
 		function enableNonEssentialScripts() {' .
 			$cookie_scripts_after_approve . '
 		}
 		</script>';
 		
+		// 3. תנאי יציאה מוקדמת
 		if ( isset( $_COOKIE['od_consent'] ) || ( ! empty( $cookie_active ) && ! $cookie_active ) ) {
 			return;
 		}
@@ -191,12 +196,13 @@ function dooble_cookie_consent_init() {
 			return;
 		}
 		
+		// 4. שאר משתני ה-ACF (את הסקריפטים כבר שאבנו למעלה)
 		$cookie_message = get_field('cookie_message', 'option');
 		$accept_btn_text = get_field('cookie_accept_btn_text', 'option');
 		$decline_btn_text = get_field('cookie_decline_btn_text', 'option');
-        $hide_decline_btn = get_field('cookie_hide_decline_btn', 'option'); // קריאת הנתון מהצ'קבוקס החדש
-		$cookie_scripts_after_approve = get_field('cookie_scripts_after_approve', 'option');
+        $hide_decline_btn = get_field('cookie_hide_decline_btn', 'option');
 		
+		// 5. ערכי ברירת מחדל אם אין ערכים מוזנים
 		if ( empty( $cookie_message ) ) {
 			$cookie_message = $default_values['message'][ $current_lang ];
 		}
@@ -207,7 +213,7 @@ function dooble_cookie_consent_init() {
 			$decline_btn_text = $default_values['decline'][ $current_lang ];
 		}
 
-        // הכנת ה-HTML של כפתור הסירוב רק במידה והוא לא הוסתר
+        // 6. הכנת ה-HTML של כפתור הסירוב
         $decline_btn_html = '';
         if ( ! $hide_decline_btn ) {
             $decline_btn_html = '
@@ -216,6 +222,7 @@ function dooble_cookie_consent_init() {
             </button>';
         }
 
+		// 7. הדפסת הבאנר עצמו
 		echo '
 		<div id="cookie-banner" class="consent" role="region" aria-label="' . __('Cookie consent', 'dooble_cookies_consent') . '">
 			<div class="consent-inner">
