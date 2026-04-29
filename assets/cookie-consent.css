@@ -2,32 +2,19 @@
  * By dooble
  * Version: 1.6
  * Last updated: 29/04/2026
+ * https://github.com/yuvalAshkenaz/cookies-consent/
  */
 .consent {
     background: rgba(17, 17, 17, 0.8);
 	backdrop-filter: blur(10px);
-    display: flex;
     width: 100%;
     height: auto;
-	line-height: 1.5;
-	gap: 20px;
     position: fixed;
     bottom: 0;
-    padding: 20px 30px;
-	color: #fff;
-    font-size: 16px;
     z-index: 8009;
-	justify-content: center;
 }
 .consent:not(.active) {
 	display: none;
-}
-.cookie-img {
-	width: auto;
-	height: auto;
-	max-width: 107px;
-	max-height: 92px;
-	margin: 0 0 auto 0;
 }
 .consent p {
 	margin: 0;
@@ -39,7 +26,24 @@
 .consent strong {
 	font-weight: 600;
 }
-.consent-inner {
+.consent-inner1 {
+    display: flex;
+    width: 100%;
+	line-height: 1.5;
+	gap: 20px;
+    padding: 20px 30px;
+	color: #fff;
+    font-size: 16px;
+	justify-content: center;
+}
+.cookie-img {
+	width: auto;
+	height: auto;
+	max-width: 107px;
+	max-height: 92px;
+	margin: 0 0 auto 0;
+}
+.consent-inner2 {
 	display: flex;
 	width: 1200px;
 	max-width: 100%;
@@ -97,10 +101,10 @@
 	.consent:not(:has(.cookie-img)) {
 		text-align: center;
 	}
-	.consent:has(.cookie-img) .consent-inner {
+	.consent:has(.cookie-img) .consent-inner2 {
 		align-items: flex-start;
 	}
-	.consent-inner {
+	.consent-inner2 {
 		flex-direction: column;
 	}
 }
