@@ -4,6 +4,8 @@ Plugin Name: dooble cookies consent
 Description: An accessible cookies consent plugin with customizable message and buttons text.
 Version: 1.6
 Author: dooble
+Last updated: 29/04/2026
+https://github.com/yuvalAshkenaz/cookies-consent/
 */
 
 add_action('wp_enqueue_scripts', 'dooble_cookie_consent_enqueue_scripts');
@@ -256,16 +258,18 @@ function dooble_cookie_consent_init() {
 		// 7. הדפסת הבאנר עצמו (התמונה מודפסת ראשונה)
 		echo '
 		<div id="cookie-banner" class="consent" role="region" aria-label="' . __('Cookie consent', 'dooble_cookies_consent') . '">
-			' . $cookie_img_html . '
-			<div class="consent-inner">
-				<div class="consent-content">
-					' . $cookie_message . '
-				</div>
-				<div class="consent-btns">
-                    ' . $decline_btn_html . '
-					<button type="button" id="od-accept" class="consent-accept" aria-controls="cookie-banner"> 
-						' . $accept_btn_text . '
-					</button>
+			<div class="consent-inner1">
+				' . $cookie_img_html . '
+				<div class="consent-inner2">
+					<div class="consent-content">
+						' . $cookie_message . '
+					</div>
+					<div class="consent-btns">
+						' . $decline_btn_html . '
+						<button type="button" id="od-accept" class="consent-accept" aria-controls="cookie-banner"> 
+							' . $accept_btn_text . '
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>
