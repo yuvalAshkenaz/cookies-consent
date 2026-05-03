@@ -2,9 +2,9 @@
 /*
 Plugin Name: dooble cookies consent
 Description: An accessible cookies consent plugin with customizable message and buttons text.
-Version: 1.6
 Author: dooble
-Last updated: 29/04/2026
+Version: 1.7
+Last updated: 03/05/2026
 https://github.com/yuvalAshkenaz/cookies-consent/
 */
 

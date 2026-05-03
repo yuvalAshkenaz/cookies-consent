@@ -1,7 +1,8 @@
 /* dooble cookies consent
  * By dooble
- * Version: 1.6
- * Last updated: 29/04/2026
+ * Version: 1.7
+ * Last updated: 03/05/2026
+ * https://github.com/yuvalAshkenaz/cookies-consent/
  */
 (function () {
 	if( document.getElementById('od-accept') )

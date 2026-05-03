@@ -1,41 +1,46 @@
 /* dooble cookies consent
  * By dooble
- * Version: 1.6
- * Last updated: 29/04/2026
+ * Version: 1.7
+ * Last updated: 03/05/2026
  * https://github.com/yuvalAshkenaz/cookies-consent/
  */
 .consent {
-    background: rgba(17, 17, 17, 0.8);
+	background: var(--cookie-consent-bg, rgba(17, 17, 17, 0.8));
 	backdrop-filter: blur(10px);
-    width: 100%;
-    height: auto;
-    position: fixed;
-    bottom: 0;
-    z-index: 8009;
+	width: 100%;
+	height: auto;
+	position: fixed;
+	bottom: 0;
+	z-index: 8009;
 }
+
 .consent:not(.active) {
 	display: none;
 }
+
 .consent p {
 	margin: 0;
-	color: #fff;
-    font-size: 16px;
+	color: var(--cookie-consent-color, #fff);
+	font-size: 16px;
 	line-height: 1.5;
 }
+
 .consent b,
 .consent strong {
 	font-weight: 600;
 }
+
 .consent-inner1 {
-    display: flex;
-    width: 100%;
+	display: flex;
+	width: 100%;
 	line-height: 1.5;
 	gap: 20px;
-    padding: 20px 30px;
-	color: #fff;
-    font-size: 16px;
+	padding: 20px 30px;
+	color: var(--cookie-consent-color, #fff);
+	font-size: 16px;
 	justify-content: center;
 }
+
 .cookie-img {
 	width: auto;
 	height: auto;
@@ -43,29 +48,34 @@
 	max-height: 92px;
 	margin: 0 0 auto 0;
 }
+
 .consent-inner2 {
 	display: flex;
 	width: 1200px;
 	max-width: 100%;
-    gap: 16px;
-    justify-content: space-between;
-    align-items: center;
+	gap: 16px;
+	justify-content: space-between;
+	align-items: center;
 }
+
 .consent-content a {
-	color: #fff;
+	color: var(--cookie-consent-link-color, #fff);
 	font-weight: 600;
 	text-decoration: underline;
 }
+
 .consent-content a:hover {
 	text-decoration: none;
-	color: #fff;
+	color: var(--cookie-consent-link-color, #fff);
 }
+
 .consent-btns {
 	width: max-content;
-    display: flex;
-    gap: 16px;
+	display: flex;
+	gap: 16px;
 	flex-shrink: 0;
 }
+
 .consent-accept,
 .consent-decline {
 	border: none;
@@ -81,18 +91,22 @@
 	-webkit-transition: all 0.2s ease;
 	transition: all 0.2s ease;
 }
+
 .consent-decline {
-	background: #fff;
-	color: #000;
+	background: var(--cookie-consent-decline-bg, #fff);
+	color: var(--cookie-consent-decline-color, #000);
 }
+
 .consent-accept {
-	background: #1290c1;
-	color: #fff;
+	background: var(--cookie-consent-accept-bg, #1290c1);
+	color: var(--cookie-consent-accept-color, #fff);
 }
+
 .consent-accept:hover,
 .consent-decline:hover {
 	opacity: 0.8;
 }
+
 .od-hidden {
 	display: none !important;
 }
@@ -108,12 +122,14 @@
 		flex-direction: column;
 	}
 }
+
 @media only screen and (max-width: 767px) {
 	.cookie-img {
 		max-width: 96px;
 		max-height: 83px;
 	}
 }
+
 @media only screen and (max-width: 599px) {
 	.cookie-img {
 		max-width: 56px;
